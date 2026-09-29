@@ -3,14 +3,14 @@
 A Next-Gen, AI-powered stock market dashboard that combines real-time financial data with immersive 3D visuals and generative AI insights.
 
 > **Status:** 🚧 In Active Development & Research Phase  
-> **Development Timeline:** 4th January 2026 – Present (Ongoing)  
+> **Development Timeline:** 4th July 2026 – Present (Ongoing)  
 > **Author & Architect:** Mohammad Ayan ([@ajlaanayan-crypto](https://github.com/ajlaanayan-crypto))
 
 ---
 
 ## ⚠️ Current Engineering Challenges & Known Limitations (Work In Progress)
 
-> *Notice: This platform is under active development (initiated **4th Jan 2026**). Below is an open technical audit of unresolved bottlenecks, edge cases, and performance hurdles where architectural solutions are currently being researched, benchmarked, and implemented.*
+> *Notice: This platform is under active development (initiated **4th July 2026**). Below is an open technical audit of unresolved bottlenecks, edge cases, and performance hurdles where architectural solutions are currently being researched, benchmarked, and implemented.*
 
 ### 1. 🖥️ UI / UX Layout & Viewport Ergonomics ("UI Sahi Nahi Hai")
 - **High-Density Clutter on Smaller Viewports**: The multi-pane terminal grid (candlestick chart, live order book, technical statistics, and AI chat dialog) causes horizontal scrolling and overflow on screens < 1280px wide.
