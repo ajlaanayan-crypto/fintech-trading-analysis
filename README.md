@@ -2,6 +2,50 @@
 
 A Next-Gen, AI-powered stock market dashboard that combines real-time financial data with immersive 3D visuals and generative AI insights.
 
+> **Status:** 🚧 In Active Development & Research Phase  
+> **Development Timeline:** 4th January 2026 – Present (Ongoing)  
+> **Author & Architect:** Mohammad Ayan ([@ajlaanayan-crypto](https://github.com/ajlaanayan-crypto))
+
+---
+
+## ⚠️ Current Engineering Challenges & Known Limitations (Work In Progress)
+
+> *Notice: This platform is under active development (initiated **4th Jan 2026**). Below is an open technical audit of unresolved bottlenecks, edge cases, and performance hurdles where architectural solutions are currently being researched, benchmarked, and implemented.*
+
+### 1. 🖥️ UI / UX Layout & Viewport Ergonomics ("UI Sahi Nahi Hai")
+- **High-Density Clutter on Smaller Viewports**: The multi-pane terminal grid (candlestick chart, live order book, technical statistics, and AI chat dialog) causes horizontal scrolling and overflow on screens < 1280px wide.
+- **Glassmorphism Contrast & Legibility**: Semi-transparent `backdrop-blur-md` cards occasionally suffer from poor text contrast against the high-frequency particle vertices of the Vanta.js 3D background.
+- **Cumulative Layout Shifts (CLS)**: Dynamic live price updates cause micro-jittering in adjacent cards before data schemas and fixed height bounds settle.
+- **Mobile Usability**: Mobile touch gestures conflict with canvas drag/zoom events on the main candlestick chart.
+
+### 2. 🤖 Google Gemini 1.5 Flash AI Limitations ("Gemini Problems")
+- **API Rate-Limit Throttling**: Rapid stock queries during volatile market hours quickly trigger Gemini API `429 Too Many Requests` when users cycle through multiple tickers.
+- **Multi-Indicator Context Saturation**: Appending combined multi-timeframe OHLC candles, MACD/RSI indicators, and full financial news stories saturates token windows, occasionally causing loss of focus in sentiment scoring.
+- **Inference Latency (1.5s – 3.5s)**: Generating natural language explanations introduces a noticeable delay, causing AI sentiment tags to lag behind instantaneous tick-by-tick price action.
+- **Sentiment Hallucinations**: During extreme flash volatility or sparse headline data, Gemini can generate conflicting bullish/bearish classification signals.
+
+### 3. 📉 Financial Graphing & Canvas Performance ("Graphs Problems")
+- **Canvas Frame Drops on High-Tick Feeds**: Standard HTML5 Canvas / Chart.js experiences noticeable frame drops (< 30 FPS) when rendering dense datasets with >10,000 real-time tick points.
+- **Multi-Indicator Rendering Overhead**: Simultaneously calculating and overlaying technical indicators (Bollinger Bands, 50/200-day EMA, VWAP, RSI sub-panels) blocks the main JavaScript thread.
+- **Auto-Scale Axis Jitter**: Rapid price fluctuations cause jarring Y-axis scale recalculations that interrupt technical chart analysis.
+
+### 4. ⚡ Real-Time Telemetry & Visual Desynchronization ("Visuals Problems")
+- **Cross-Component Race Conditions**: Because ticker marquees, header price cards, and the main chart consume asynchronous polling and WebSocket streams independently, 200–500ms price discrepancies occasionally appear between widgets.
+- **3D Background GPU Resource Contention**: Vanta.js / Three.js continuous WebGL draw loops consume significant GPU cycles, starving the main thread during heavy chart re-renders on integrated GPUs.
+- **DOM Re-render Micro-Flicker**: Unoptimized React state dispatching triggers unnecessary full-card re-renders rather than atomic element updates.
+
+---
+
+## 🛠️ Solutions Under Active Investigation & Next Sprint Roadmap
+
+| Problem Domain | Root Cause | Active Solution Being Researched / Implemented |
+| :--- | :--- | :--- |
+| **UI & Layout** | Fixed grid desktop assumptions | Implementing responsive off-canvas drawer panels, strict CSS subgrid aspect clamps, and an adaptive high-contrast toggle. |
+| **Gemini AI** | Synchronous REST blocking & rate quotas | Integrating Server-Sent Events (SSE) streaming, strict JSON Schema outputs, and Redis semantic caching with token budgeting. |
+| **Chart Performance** | Canvas CPU rasterization bottlenecks | Benchmarking migration to TradingView's Lightweight Charts (WebGL/Canvas) and offloading math to Web Workers. |
+| **Visual Desync** | Decoupled polling intervals | Migrating all UI state consumers to a single WebSocket gateway with monotonic tick sequence IDs and atomic React state slices. |
+| **3D GPU Overhead** | Unthrottled render loop | Auto-pausing Vanta.js WebGL canvas when FPS dips below 55 or when the user enters focused chart inspection mode. |
+
 ---
 
 ## 🛠️ Technology Stack
