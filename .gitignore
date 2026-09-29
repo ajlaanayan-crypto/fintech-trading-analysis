@@ -1,0 +1,22 @@
+# Generated Git Ignore
+*$py.class
+*.env
+*.log
+*.py[cod]
+.DS_Store
+.env
+.env.*.local
+.env.local
+.next/
+.pnp.js
+.pnp/
+.pytest_cache/
+.turbo/
+.venv/
+Thumbs.db
+__pycache__/
+build/
+dist/
+env/
+node_modules/
+venv/
